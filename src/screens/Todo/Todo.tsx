@@ -1,9 +1,13 @@
 import {Box, FlatList} from 'native-base';
 import React from 'react';
 import Header from '../../components/Header';
+import {useAppSelector} from '../../store/hooks';
+import {todoListSelector} from '../../store/selectors';
 import TodoItem from './components/TodoItem';
 
 const Todo = () => {
+  const todoList = useAppSelector(todoListSelector);
+
   const _renderItem = ({item, index}) => {
     return <TodoItem title="Learn react native" status={index % 2 === 0} />;
   };
@@ -11,7 +15,7 @@ const Todo = () => {
   return (
     <Box flex={1}>
       <Header title="Todo" />
-      <FlatList data={[1, 1, 1, 1, 1, 1]} renderItem={_renderItem} />
+      <FlatList data={todoList} renderItem={_renderItem} />
     </Box>
   );
 };
