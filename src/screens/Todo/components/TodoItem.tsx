@@ -1,14 +1,21 @@
-import React, {useState} from 'react';
 import {Box, Button, Checkbox, Icon} from 'native-base';
+import React from 'react';
 import Entypo from 'react-native-vector-icons/Entypo';
+import {useDispatch} from 'react-redux';
+import {ITodo, toggleStatus} from '../todoSlice';
 
 interface IProps {
-  title: string;
-  status: boolean;
+  item: ITodo;
 }
 
-const TodoItem: React.FC<IProps> = ({title, status}) => {
-  const [isChecked, setIsChecked] = useState(status);
+const TodoItem = ({item}: IProps) => {
+  const {id, title, status} = item;
+
+  const dispatch = useDispatch();
+
+  const _onToggleStatus = () => {
+    dispatch(toggleStatus(id));
+  };
 
   return (
     <Box
@@ -22,8 +29,8 @@ const TodoItem: React.FC<IProps> = ({title, status}) => {
         <Checkbox
           value=""
           defaultIsChecked={status}
-          isChecked={isChecked}
-          onChange={setIsChecked}>
+          isChecked={status}
+          onChange={_onToggleStatus}>
           {title}
         </Checkbox>
       </Box>

@@ -6,18 +6,14 @@ export interface ITodo {
   status: boolean;
 }
 
-const initialState: ITodo[] = [
-  {id: '1', title: 'Learn More', status: true},
-  {id: '2', title: 'Learn More', status: true},
-  {id: '3', title: 'Learn More', status: true},
-];
+const initialState: ITodo[] = [];
 
 export const counterSlice = createSlice({
   name: 'counter',
   initialState,
   reducers: {
     addTodo: (state, action: PayloadAction<ITodo>) => {
-      state = [...state, action.payload];
+      state.push(action.payload);
     },
     toggleStatus: (state, action: PayloadAction<string>) => {
       const todoCurrent: ITodo | undefined = state?.find(
