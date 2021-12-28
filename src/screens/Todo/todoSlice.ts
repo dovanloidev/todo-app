@@ -24,10 +24,19 @@ export const counterSlice = createSlice({
         todoCurrent.status = !todoCurrent.status;
       }
     },
+    removeTodo: (state, action: PayloadAction<string>) => {
+      const todoIndex = state.findIndex(({id}) => id === action.payload);
+      state.splice(todoIndex, 1);
+    },
+    updateTodo: (state, action: PayloadAction<ITodo>) => {
+      const todoIndex = state.findIndex(({id}) => id === action.payload.id);
+      state[todoIndex] = action.payload;
+    },
   },
 });
 
 // Action creators are generated for each case reducer function
-export const {addTodo, toggleStatus} = counterSlice.actions;
+export const {addTodo, toggleStatus, removeTodo, updateTodo} =
+  counterSlice.actions;
 
 export default counterSlice.reducer;
