@@ -31,7 +31,7 @@ const Header: React.FC<IProps> = ({title}) => {
           _pressed={{bg: 'gray.100'}}
         />
       )}
-      <Text flex={1} fontSize="lg" bold textAlign="center">
+      <Text flex={1} my="4" fontSize="lg" bold textAlign="center">
         {title}
       </Text>
       {isGoBack && (
